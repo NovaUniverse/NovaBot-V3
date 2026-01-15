@@ -9,4 +9,5 @@ export const Quotes = [
   "Clapping your hands is just high-fiving yourself",
   "If you think about it, sand is just tiny rocks",
   "Making a typo in an online argument is the equivalent of voice cracking in a verbal argument.",
+  "╾━╤デ╦︻ 👁️👄👁️"
 ]
