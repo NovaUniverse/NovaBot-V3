@@ -9,7 +9,7 @@ export function initializeCommands(bot: Bot): Map<string, Command> {
   const mcftop = new McfTopCommand(bot);
   const mcfsolotop = new McfSoloTopCommand(bot);
 
-  return new Map([
+  return new Map<string, Command>([
     ["mcfstats", mcfstats],
     ["mcftop", mcftop],
     ["mcfsolotop", mcfsolotop],

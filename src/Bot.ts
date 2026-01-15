@@ -3,6 +3,7 @@ import { Config } from "./config/Config";
 import { initializeCommands } from "./commands";
 import { Command } from "./commands/Command";
 import { StatisticsDB } from "./database/StatisticsDB";
+import { Quotes } from "./Quotes";
 
 export class Bot {
   public readonly config: Config;
@@ -23,6 +24,7 @@ export class Bot {
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.DirectMessages,
       ],
       partials: [Partials.Channel, Partials.Message, Partials.User],
     });
@@ -39,6 +41,9 @@ export class Bot {
     this.client.once("ready", () => {
       console.log(`Logged in as ${this.client.user?.tag}!`);
       console.log(`Bot is ready and serving ${this.client.guilds.cache.size} guilds`);
+
+      // Set bot activity
+      this.client.user?.setActivity("novauniverse.net", { type: 0 }); // type 0 = Playing
     });
 
     // Interaction handler for slash commands
@@ -80,6 +85,20 @@ export class Bot {
     // Warn handler
     this.client.on("warn", (warning) => {
       console.warn("Discord client warning:", warning);
+    });
+
+    // DM handler - respond with random quote
+    this.client.on("messageCreate", async (message) => {
+      // Ignore messages from bots and messages in guilds (only respond to DMs)
+      if (message.author.bot || message.guild) return;
+
+      try {
+        const randomQuote = Quotes[Math.floor(Math.random() * Quotes.length)];
+        await message.channel.send(randomQuote);
+        console.log(`Sent random quote to ${message.author.tag} via DM`);
+      } catch (error) {
+        console.error(`Error responding to DM from ${message.author.tag}:`, error);
+      }
     });
   }
 
