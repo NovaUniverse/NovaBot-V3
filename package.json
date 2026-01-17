@@ -17,7 +17,8 @@
     "console-stamp": "^3.1.2",
     "discord.js": "^14.25.1",
     "dotenv": "^17.2.3",
-    "mysql2": "^3.16.0"
+    "mysql2": "^3.16.0",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@types/node": "^25.0.9",
